@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_beep: ^1.0.0
-  mobile_scanner: ^3.4.1
+  mobile_scanner: ^4.0.1
 
 dev_dependencies:
   flutter_test:
