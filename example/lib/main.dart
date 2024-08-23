@@ -100,7 +100,7 @@ class _HomePageState extends State<HomePage> {
           borderStrokeWidth: 2,
           buttonColor: Colors.yellow,
           borderFlashDuration: 250,
-          cancelButtonText: "取消",
+          cancelButtonText: "Cancel",
           successBeep: false,
         );
 

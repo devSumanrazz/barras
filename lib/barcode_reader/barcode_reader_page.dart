@@ -132,52 +132,45 @@ class _BarcodeReaderPageState extends State<BarcodeReaderPage> {
   }
 
   Widget _buildTorchButton() {
-    return (_captureController.torchEnabled)
-        ? IconButton(
-            icon: ValueListenableBuilder(
-              builder: (context, state, child) {
-                switch (state as TorchState) {
-                  case TorchState.auto:
-                    return IconButton(
-                      color: Colors.white,
-                      iconSize: 32.0,
-                      icon: const Icon(Icons.flash_auto),
-                      onPressed: () async {
-                        await _captureController.toggleTorch();
-                      },
-                    );
-                  case TorchState.off:
-                    return IconButton(
-                      color: Colors.white,
-                      iconSize: 32.0,
-                      icon: const Icon(Icons.flash_off),
-                      onPressed: () async {
-                        await _captureController.toggleTorch();
-                      },
-                    );
-                  case TorchState.on:
-                    return IconButton(
-                      color: Colors.white,
-                      iconSize: 32.0,
-                      icon: const Icon(Icons.flash_on),
-                      onPressed: () async {
-                        await _captureController.toggleTorch();
-                      },
-                    );
-                  case TorchState.unavailable:
-                    return const Icon(
-                      Icons.no_flash,
-                      color: Colors.grey,
-                    );
-                }
+    return ValueListenableBuilder<MobileScannerState>(
+      builder: (context, state, child) {
+        switch ((state.torchState)) {
+          case TorchState.auto:
+            return IconButton(
+              color: Colors.white,
+              iconSize: 32.0,
+              icon: const Icon(Icons.flash_auto),
+              onPressed: () async {
+                await _captureController.toggleTorch();
               },
-              valueListenable: _captureController,
-            ),
-            onPressed: () {
-              _captureController.toggleTorch();
-            },
-          )
-        : Container(width: 10, height: 10);
+            );
+          case TorchState.off:
+            return IconButton(
+              color: Colors.white,
+              iconSize: 32.0,
+              icon: const Icon(Icons.flash_off),
+              onPressed: () async {
+                await _captureController.toggleTorch();
+              },
+            );
+          case TorchState.on:
+            return IconButton(
+              color: Colors.white,
+              iconSize: 32.0,
+              icon: const Icon(Icons.flash_on),
+              onPressed: () async {
+                await _captureController.toggleTorch();
+              },
+            );
+          case TorchState.unavailable:
+            return const Icon(
+              Icons.no_flash,
+              color: Colors.grey,
+            );
+        }
+      },
+      valueListenable: _captureController,
+    );
   }
 
   Widget _buildCancelButton() {
