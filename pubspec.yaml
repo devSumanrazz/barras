@@ -11,10 +11,11 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_beep: ^1.0.0
-  mobile_scanner: ^4.0.1
+  mobile_scanner: ^5.2.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
 flutter:
+  uses-material-design: true
