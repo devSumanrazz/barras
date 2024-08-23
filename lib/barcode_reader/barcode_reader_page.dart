@@ -132,20 +132,43 @@ class _BarcodeReaderPageState extends State<BarcodeReaderPage> {
   }
 
   Widget _buildTorchButton() {
-    _captureController.toggleTorch();
     return (_captureController.torchEnabled)
         ? IconButton(
             icon: ValueListenableBuilder(
               builder: (context, state, child) {
                 switch (state as TorchState) {
-                  case TorchState.on:
-                    return Icon(Icons.flash_on, color: widget.buttonColor);
-                  case TorchState.off :
-                    return Icon(Icons.flash_off, color: widget.buttonColor);
                   case TorchState.auto:
-                    return Icon(Icons.flash_on, color: widget.buttonColor);
+                    return IconButton(
+                      color: Colors.white,
+                      iconSize: 32.0,
+                      icon: const Icon(Icons.flash_auto),
+                      onPressed: () async {
+                        await _captureController.toggleTorch();
+                      },
+                    );
+                  case TorchState.off:
+                    return IconButton(
+                      color: Colors.white,
+                      iconSize: 32.0,
+                      icon: const Icon(Icons.flash_off),
+                      onPressed: () async {
+                        await _captureController.toggleTorch();
+                      },
+                    );
+                  case TorchState.on:
+                    return IconButton(
+                      color: Colors.white,
+                      iconSize: 32.0,
+                      icon: const Icon(Icons.flash_on),
+                      onPressed: () async {
+                        await _captureController.toggleTorch();
+                      },
+                    );
                   case TorchState.unavailable:
-                    return Icon(Icons.flash_off, color: widget.buttonColor);
+                    return const Icon(
+                      Icons.no_flash,
+                      color: Colors.grey,
+                    );
                 }
               },
               valueListenable: _captureController,
