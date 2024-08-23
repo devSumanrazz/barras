@@ -132,18 +132,23 @@ class _BarcodeReaderPageState extends State<BarcodeReaderPage> {
   }
 
   Widget _buildTorchButton() {
-    return (_captureController.hasTorch)
+    _captureController.toggleTorch();
+    return (_captureController.torchEnabled)
         ? IconButton(
             icon: ValueListenableBuilder(
               builder: (context, state, child) {
                 switch (state as TorchState) {
                   case TorchState.on:
                     return Icon(Icons.flash_on, color: widget.buttonColor);
-                  case TorchState.off:
+                  case TorchState.off :
+                    return Icon(Icons.flash_off, color: widget.buttonColor);
+                  case TorchState.auto:
+                    return Icon(Icons.flash_on, color: widget.buttonColor);
+                  case TorchState.unavailable:
                     return Icon(Icons.flash_off, color: widget.buttonColor);
                 }
               },
-              valueListenable: _captureController.torchState,
+              valueListenable: _captureController,
             ),
             onPressed: () {
               _captureController.toggleTorch();
